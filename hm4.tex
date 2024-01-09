@@ -1,0 +1,69 @@
+% 计算方法第四周
+\documentclass[utf8,a4paper,11pt]{article}
+\usepackage{ctex}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{booktabs}
+
+\title{第四次上机作业}
+\author{21300180079吕昂格}
+\date{\today}
+
+\begin{document}
+\maketitle
+\section*{第一题}
+对于对原来线性方程组的系数矩阵进行扰动得到的扰动矩阵\(A+\delta A\)，
+方程\((A+\delta A)(x+\delta x) = b\)，用python计算得出(保留三位小数):
+\[\delta x = [-10.586, 17.374, -4.226, 2.524]\]
+误差的二范数：
+\[\| \delta x \Vert = 20.932\]
+解的相对误差为：
+\[\frac{\| \delta x \Vert}{\| x \Vert} = 0.0955\]
+此时系数矩阵的相对误差为:
+\[\frac{\| \delta A \Vert}{\| A \Vert} = 0.0076\]
+
+从理论角度分析，我们有如下公式(北大教材定理2.2.1):
+\[\frac{\| \delta x \Vert}{\| x \Vert} \leqslant \frac{k(A)}{1-k(A)\frac{\| \delta A \Vert}{\| A \Vert}}\frac{\| \delta A \Vert}{\| A \Vert} \]
+其中\(k(A) = \|A^{-1}\Vert \|A\Vert\)
+且当\(\frac{\| \delta A \Vert}{\| A \Vert}\)很小时，上面的估计式可化为：
+\[\frac{\| \delta x \Vert}{\| x \Vert} \leqslant k(A) \frac{\| \delta A \Vert}{\| A \Vert} \]
+本题计算得出的\(k(A)=2984.0927\),得出对解的误差估计为: 
+\[\frac{\| \delta x \Vert}{\| x \Vert}\leqslant 25.962\]
+
+\section*{第二题}
+构建算法2.5.1的程序见文件\\
+得到对Hilbert矩阵的条件数估计：
+\begin{table}[!ht]
+    \begin{tabular*}{\hsize}{@{}@{\extracolsep{\fill}}cc@{}}
+    \toprule
+    阶数 &无穷范数条件数\\
+    \midrule
+    5 & 943655\\
+    10 & \(3.54 \times 10^{13}\)\\
+    15 & \(7.04\times 10^{17}\)\\
+    20 & \(1.35 \times 10^{18}\)\\
+    \bottomrule
+    \end{tabular*}
+  \end{table}
+对于问题2我们采用numpy.random库生成随机向量\(x\),与Guass消去法得到的解产生偏差\(\delta x\)
+
+对n从5到30估计相对误差\(\displaystyle\frac{\| \delta x \Vert}{\| x \Vert}\):
+\begin{table}[!ht]
+    \begin{tabular*}{\hsize}{@{}@{\extracolsep{\fill}}cc@{}}
+    \toprule
+    阶数 &解相对误差\\
+    \midrule
+    5 & \(1.78\times 10^{-16}\)\\
+    10 & \(1.39\times 10^{-15}\)\\
+    15 & \(1.28\times 10^{-14}\)\\
+    20 & \(1.90\times 10^{-12}\)\\
+    25 & \(4.09\times 10^{-11}\)\\
+    30 & \(7.01\times 10^{-9}\)\\
+    \bottomrule
+    \end{tabular*}
+  \end{table}
+对于问题2我们采用numpy.ra
+
+\end{document}

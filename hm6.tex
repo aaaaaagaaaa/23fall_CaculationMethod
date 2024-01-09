@@ -1,0 +1,80 @@
+% 计算方法第五周
+\documentclass[utf8,a4paper,11pt]{article}
+\usepackage{ctex}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{underscore}
+
+\title{第六次上机作业}
+\author{21300180079吕昂格}
+\date{\today}
+
+\begin{document}
+\maketitle
+\section*{复旦教材第一题}
+复现书上例题4，见文件\(hm 6\_ 1.py\)，得到结果如下：
+\begin{table}[!ht]
+    \begin{tabular*}{\hsize}{@{}@{\extracolsep{\fill}}cccc@{}}
+    \toprule
+    x &\(F(x)\) & \(F^{'}(x)\) & \([F^{'}(x)]^{-1}F(x)\)\\
+    \midrule
+    1.15      &4.28750000\(\times 10^{-2}\)& -1.0325&    -4.15254237\(\times 10^{-2}\) \\
+    1.19152542& 6.02064963\(\times 10^{-3}\)& -0.74080149& -8.12721043\(\times 10^{-3}\)\\
+    1.19965263& 2.36643116\(\times 10^{-4}\)&-0.68250067& -3.46729499\(\times 10^{-4}\)\\
+    1.19999936&4.32713245\(\times 10^{-7}\)& -0.68000458 &-6.36338720\(\times 10^{-7}\)\\
+    \bottomrule
+    \end{tabular*}
+\end{table}
+
+\section*{复旦教材第二题}
+复现书上例题6，见文件\(hm  6\_ 2.py\)，得到结果如下：
+
+\begin{table}[!ht]
+    \begin{tabular*}{\hsize}{@{}@{\extracolsep{\fill}}cccc@{}}
+    \toprule
+    x &\(F(x)\) & \(F^{'}(x)\) & \([F^{'}(x)]^{-1}F(x)\)\\
+    \midrule
+    1.15      &4.28750000\(\times 10^{-2}\)& -1.0325&    -4.15254237\(\times 10^{-2}\) \\
+    1.19152542& 6.02064963\(\times 10^{-3}\)& -1.0325& -5.83113765\(\times 10^{-3}\)\\
+    1.19735656& 1.82267575\(\times 10^{-3}\)&-1.0325&  -1.76530339\(\times 10^{-3}\)\\
+    1.19912186&5.99907314\(\times 10^{-4}\)& -1.0325 &-5.81024032\(\times 10^{-4}\)\\
+    \bottomrule
+    \end{tabular*}
+\end{table}
+可见简化Newton迭代法比起Newton迭代法精度更差
+
+
+\section*{清华教材习题}
+我们设迭代函数为:
+\[
+\Phi (x_1,x_2,x_3)=
+\begin{pmatrix}
+    \frac{1}{6}+\frac{1}{3}\cos(x_2 x_3)\\
+    \frac{1}{9} \sqrt{x_1^2 + \sin x_3 +1.06} - 0.1\\
+    -\frac{1}{20}e^{-x_1 x_2} - \frac{1}{20}(\frac{10}{3}\pi -1)\\
+\end{pmatrix}
+\]
+则有:
+\[
+\Phi ^{'}(x)=
+\begin{pmatrix}
+    0 & -\frac{1}{3}x_3 \sin x_2 x_3 &-\frac{1}{3}x_2 \sin x_2 x_3\\
+    \frac{1}{9} \frac{x_1}{\sqrt{x_1^2 + \sin x_3 +1.06}}&0&\frac{1}{18} \frac{\cos x_3}{\sqrt{x_1^2 + \sin x_3 +1.06}}\\
+    \frac{x_2}{20} e^{-x_1 x_2}&\frac{x_1}{20} e^{-x_1 x_2}&0\\
+\end{pmatrix}    
+\]
+在区域\(D=\{(x_1,x_2,x_3)\in \mathbb{R}^3 | \;|x_i| \leq 1\}\)上\(\|\Phi^{'}(x)\Vert _1 \leq 1\),
+故\(\rho(\Phi^{'}(x)) \leq 1\)迭代法收敛，用\(x_0=(0, 0, 0)\)计算方程的根(见文件\(hm6\_ 3\_1.py\))：
+
+我们设置最大迭代次数\(N=100\)，在迭代到\(\|x_{k+1} - x_{k} \Vert \leq 10^{-5}\)时结束迭代,
+计算得到最后的近似解为:\[x = (5.00000000\times 10^{-1}  2.48385686\times 10 ^{-8} -5.23598776\times 10^{-1})\]
+
+接下来我们使用Newton法计算方程的近似解:\\
+以\((0.5, 0.5, 0.5)\)为初值，计算的解为:\[(5.00000000\times 10^{-1},2.84752053\times 10^{-18},-5.23598776\times 10{-1})\]
+以\((0.5, 0.2, 0.8)\)为初值，计算的解为:\[(5.00000000\times 10^{-1},-1.35134910\times 10^{-18},-5.23598776\times 10{-1})\]
+以\((0.1, 0.3, 0.3)\)为初值，计算的解为:\[(5.00000000\times 10^{-1},-6.92132294\times 10^{-19},-5.23598776\times 10{-1})\]
+
+\end{document}
